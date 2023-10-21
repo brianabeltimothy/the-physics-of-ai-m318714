@@ -6,6 +6,13 @@ public class Drive : MonoBehaviour
 {
     public float speed = 10.0f;
     public float rotationSpeed = 100.0f;
+    public Transform tankTurret;
+    public GameObject shell;
+    public Transform shellSpawner;
+
+    private void Awake() {
+        tankTurret = transform.Find("TankRenderers/TankTurret");
+    }
 
     void Update()
     {
@@ -24,5 +31,20 @@ public class Drive : MonoBehaviour
 
         // Rotate around our y-axis
         transform.Rotate(0, rotation, 0);
+
+        if(Input.GetKey(KeyCode.T)){
+            tankTurret.RotateAround(tankTurret.position, tankTurret.right, -2);
+        }
+        else if(Input.GetKey(KeyCode.G)){
+            tankTurret.RotateAround(tankTurret.position, tankTurret.right, 2);
+        }
+
+        if(Input.GetKeyDown(KeyCode.B)){
+            fire();
+        }
+    }
+
+    public void fire(){
+        Instantiate(shell, shellSpawner.position, shellSpawner.rotation);
     }
 }

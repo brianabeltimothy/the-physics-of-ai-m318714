@@ -9,6 +9,6 @@ public class MoveShell : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(0, speed * 0.5f * Time.deltaTime, speed * Time.deltaTime); 
+        transform.Translate(0, 0, speed * Time.deltaTime); 
     }
 }
