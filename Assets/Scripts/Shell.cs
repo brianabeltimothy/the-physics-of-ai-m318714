@@ -1,45 +1,40 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Shell : MonoBehaviour
-{
+public class Shell : MonoBehaviour {
+
     public GameObject explosion;
-    public float speed = 0f;
-    public float ySpeed = 0f;
-    public float mass = 1.0f;
-    public float force = 1.0f;
-    public float drag = 1.0f;
-    public float gravity = -9.8f;
-    public float gravityAcceleration;
-    public float acceleration;
+    float speed = 0.0f;
+    float ySpeed = 0.0f;
+    float mass = 30.0f;
+    float force = 4.0f;
+    float drag = 1.0f;
+    float gravity = -9.8f;
+    float gAccel;
+    float acceleration;
 
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "tank" || col.gameObject.tag == "ground")
-        {
+
+    void OnCollisionEnter(Collision col) {
+
+        if (col.gameObject.tag == "tank") {
             GameObject exp = Instantiate(explosion, this.transform.position, Quaternion.identity);
             Destroy(exp, 0.5f);
             Destroy(this.gameObject);
         }
     }
 
-    void Start()
-    {
-        acceleration = force / mass;
-        speed += acceleration * 1;
+    private void Start() {
 
-        gravityAcceleration = gravity / mass;
+        acceleration = force / mass;
+        speed += acceleration * 1.0f;
+        gAccel = gravity / mass;
     }
 
-    void LateUpdate()
-    {
+    void LateUpdate() {
+
         speed *= (1 - Time.deltaTime * drag);
-        ySpeed += gravityAcceleration * Time.deltaTime;
-
-        transform.Translate(0, ySpeed, speed * Time.deltaTime);   
-
-        if (speed < 0.0f)
-        {
-            speed = 0.0f;
-        }
+        ySpeed += gAccel * Time.deltaTime;
+        this.transform.Translate(0.0f, ySpeed, speed);
     }
 }

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveShell : MonoBehaviour
-{
-    [SerializeField]
-    private float speed = 1.0f;
+public class MoveShell : MonoBehaviour {
 
-    void Update()
-    {
-        transform.Translate(0, 0, speed * Time.deltaTime); 
+    public float speed = 1.0f;
+
+
+    void Update() {
+
+        transform.Translate(0.0f, 0.0f, Time.deltaTime * speed);
     }
 }
