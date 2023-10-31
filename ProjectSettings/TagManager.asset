@@ -7,6 +7,7 @@ TagManager:
   - tank
   - ground
   - goal
+  - agent
   layers:
   - Default
   - TransparentFX
